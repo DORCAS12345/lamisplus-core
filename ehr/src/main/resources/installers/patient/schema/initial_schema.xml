@@ -1,0 +1,942 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-1">
+        <createSequence sequenceName="address_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-2">
+        <createSequence sequenceName="codeable_concept_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-3">
+        <createSequence sequenceName="country_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-4">
+        <createSequence sequenceName="facility_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-5">
+        <createSequence sequenceName="facility_service_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-6">
+        <createSequence sequenceName="identifier_type_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-7">
+        <createSequence sequenceName="jhi_persistent_audit_event_event_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-8">
+        <createSequence sequenceName="lamis_user_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-9">
+        <createSequence sequenceName="module_access_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-10">
+        <createSequence sequenceName="module_dependencies_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-11">
+        <createSequence sequenceName="module_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-12">
+        <createSequence sequenceName="patient_encounter_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-13">
+        <createSequence sequenceName="patient_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-14">
+        <createSequence sequenceName="patient_observation_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-15">
+        <createSequence sequenceName="patient_service_enrollment_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-16">
+        <createSequence sequenceName="patient_visit_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-17">
+        <createSequence sequenceName="person_contact_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-18">
+        <createSequence sequenceName="person_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-19">
+        <createSequence sequenceName="person_relative_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-20">
+        <createSequence sequenceName="provider_codeset_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-21">
+        <createSequence sequenceName="provider_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-22">
+        <createSequence sequenceName="province_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-23">
+        <createSequence sequenceName="service_form_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-24">
+        <createSequence sequenceName="service_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-25">
+        <createSequence sequenceName="state_id_seq"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-26">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="address"/>
+            </not>
+        </preConditions>
+        <createTable tableName="address">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="address_pkey"/>
+            </column>
+            <column name="city" type="VARCHAR(255)"/>
+            <column name="landmark" type="VARCHAR(255)"/>
+            <column name="street_address" type="VARCHAR(255)"/>
+            <column name="zip_code" type="VARCHAR(255)"/>
+            <column name="country_id" type="BIGINT"/>
+            <column name="person_contact_id" type="BIGINT"/>
+            <column name="province_id" type="BIGINT"/>
+            <column name="state_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-27">
+        <createTable tableName="codeable_concept">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="codeable_concept_pkey"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-28">
+        <createTable tableName="codifier">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOL"/>
+            <column name="code" type="VARCHAR(255)"/>
+            <column name="codifier_group" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="display" type="VARCHAR(255)"/>
+            <column name="language" type="VARCHAR(255)"/>
+            <column name="version" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-29">
+        <createTable tableName="concept_coding">
+            <column name="concept_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="coding_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-30">
+        <createTable tableName="country">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="country_pkey"/>
+            </column>
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-31">
+        <createTable tableName="facility">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="facility_pkey"/>
+            </column>
+            <column name="facility_code" type="VARCHAR(255)"/>
+            <column name="facility_level" type="VARCHAR(255)"/>
+            <column name="facility_level_option" type="VARCHAR(255)"/>
+            <column name="facility_name" type="VARCHAR(255)"/>
+            <column name="latitude" type="VARCHAR(255)"/>
+            <column name="longitude" type="VARCHAR(255)"/>
+            <column name="ownership" type="VARCHAR(255)"/>
+            <column name="ownership_type" type="VARCHAR(255)"/>
+            <column name="physical_location" type="VARCHAR(255)"/>
+            <column name="postal_address" type="VARCHAR(255)"/>
+            <column name="start_date" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-32">
+        <createTable tableName="facility_service">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="facility_service_pkey"/>
+            </column>
+            <column name="charge" type="BOOL"/>
+            <column name="day_service" type="VARCHAR(255)"/>
+            <column name="time_service" type="VARCHAR(255)"/>
+            <column name="facility_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-33">
+        <createTable tableName="identifier_type">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="identifier_type_pkey"/>
+            </column>
+            <column name="identifier_type_name" type="VARCHAR(255)"/>
+            <column name="validator" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-34">
+        <createTable tableName="jhi_persistent_audit_event">
+            <column autoIncrement="true" name="event_id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="jhi_persistent_audit_event_pkey"/>
+            </column>
+            <column name="event_date" type="TIMESTAMP(29) WITHOUT TIME ZONE"/>
+            <column name="event_type" type="VARCHAR(255)"/>
+            <column name="principal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-35">
+        <createTable tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-36">
+        <createTable tableName="lamis_authority">
+            <column name="id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="module_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-37">
+        <createTable tableName="lamis_user">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="lamis_user_pkey"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP(29) WITHOUT TIME ZONE"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP(29) WITHOUT TIME ZONE"/>
+            <column name="activated" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="activation_key" type="VARCHAR(20)"/>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lang_key" type="VARCHAR(255)"/>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reset_date" type="TIMESTAMP(29) WITHOUT TIME ZONE"/>
+            <column name="reset_key" type="VARCHAR(20)"/>
+            <column name="person_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-38">
+        <createTable tableName="lamis_user_authority">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-39">
+        <createTable tableName="module">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="module_pkey"/>
+            </column>
+            <column name="active" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="artifact" type="VARCHAR(255)"/>
+            <column name="base_package" type="VARCHAR(255)"/>
+            <column name="build_time" type="TIMESTAMP(29) WITHOUT TIME ZONE"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="module_map" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="umd_location" type="VARCHAR(255)"/>
+            <column name="version" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-40">
+        <createTable tableName="module_access">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="module_access_pkey"/>
+            </column>
+            <column name="module_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-41">
+        <createTable tableName="module_access_authorities">
+            <column name="module_access_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authorities_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-42">
+        <createTable tableName="module_dependencies">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="module_dependencies_pkey"/>
+            </column>
+            <column name="version" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dependency_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="module_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-43">
+        <createTable tableName="patient">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="patient_pkey"/>
+            </column>
+            <column name="date_registration" type="date"/>
+            <column name="facility_id" type="BIGINT"/>
+            <column name="person_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-4455">
+        <createTable tableName="patient_encounter">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="patient_encounter_pkey"/>
+            </column>
+            <column name="date_encounter" type="date"/>
+            <column name="class_" type="BIGINT"/>
+            <column name="location_id" type="BIGINT"/>
+            <column name="part_of_id" type="BIGINT"/>
+            <column name="patient_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="services_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-45">
+        <createTable tableName="patient_encounter_participants">
+            <column name="patient_encounter_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="participants_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-11111">
+        <createTable tableName="patient_observation">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="patient_observation_pkey"/>
+            </column>
+            <column name="form_data" type="VARCHAR(255)"/>
+            <column name="form_code" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="patient_encounter_id" type="BIGINT"/>
+            <column name="patient_id" type="BIGINT"/>
+            <column name="service_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-427">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="patient_service_enrollment"/>
+            </not>
+        </preConditions>
+        <createTable tableName="patient_service_enrollment">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="patient_service_enrollment_pkey"/>
+            </column>
+            <column name="date_enrollment" type="date"/>
+            <column name="date_exist" type="date"/>
+            <column name="identifier_value" type="VARCHAR(255)"/>
+            <column name="identifier_type_id" type="BIGINT"/>
+            <column name="patient_id" type="BIGINT"/>
+            <column name="services_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-4899">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="patient_visit"/>
+            </not>
+        </preConditions>
+        <createTable tableName="patient_visit">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="patient_visit_pkey"/>
+            </column>
+            <column name="date_visit_end" type="date"/>
+            <column name="date_visit_start" type="date"/>
+            <column name="time_visit_end" type="TIME WITHOUT TIME ZONE"/>
+            <column name="time_visit_start" type="TIME WITHOUT TIME ZONE"/>
+            <column name="patient_id" type="BIGINT"/>
+            <column name="visit_type_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-49566">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="person"/>
+            </not>
+        </preConditions>
+        <createTable tableName="person">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="person_pkey"/>
+            </column>
+            <column name="dob" type="date"/>
+            <column name="dob_estimated" type="BOOL"/>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="other_names" type="VARCHAR(255)"/>
+            <column name="education_id" type="BIGINT"/>
+            <column name="gender_id" type="BIGINT"/>
+            <column name="occupation_id" type="BIGINT"/>
+            <column name="marital_status_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-50">
+        <createTable tableName="person_contact">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="person_contact_pkey"/>
+            </column>
+            <column name="alternate__phone_number" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="mobile_phone_number" type="VARCHAR(255)"/>
+            <column name="person_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-5881">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="person_relative"/>
+            </not>
+        </preConditions>
+        <createTable tableName="person_relative">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="person_relative_pkey"/>
+            </column>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="alternate_phone_number" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="mobile_phone_number" type="VARCHAR(255)"/>
+            <column name="other_names" type="VARCHAR(255)"/>
+            <column name="relationship_type_id" type="BIGINT"/>
+            <column name="person_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-52">
+        <createTable tableName="provider">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="provider_pkey"/>
+            </column>
+            <column name="provider_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-53">
+        <createTable tableName="provider_codeset">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="provider_codeset_pkey"/>
+            </column>
+            <column name="code" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="long_name" type="VARCHAR(255)"/>
+            <column name="short_name" type="VARCHAR(255)"/>
+            <column name="provider_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-54">
+        <createTable tableName="province">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="province_pkey"/>
+            </column>
+            <column name="archive" type="BOOL"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="state_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-55">
+        <createTable tableName="service">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="service_pkey"/>
+            </column>
+            <column name="service_name" type="VARCHAR(255)"/>
+            <column name="module_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-56">
+        <createTable tableName="service_form">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="service_form_pkey"/>
+            </column>
+            <column name="form_code" type="VARCHAR(255)"/>
+            <column name="form_url" type="TEXT"/>
+            <column name="form_version" type="VARCHAR(255)"/>
+            <column name="json_form" type="TEXT"/>
+            <column name="service_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-57">
+        <createTable tableName="state">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="state_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-58">
+        <addPrimaryKey columnNames="id" constraintName="codifier_pkey" tableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-59">
+        <addPrimaryKey columnNames="event_id, name" constraintName="jhi_persistent_audit_evt_data_pkey" tableName="jhi_persistent_audit_evt_data"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-60">
+        <addPrimaryKey columnNames="id" constraintName="lamis_authority_pkey" tableName="lamis_authority"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-61">
+        <addPrimaryKey columnNames="user_id, authority_id" constraintName="lamis_user_authority_pkey" tableName="lamis_user_authority"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-62">
+        <addPrimaryKey columnNames="module_access_id, authorities_id" constraintName="module_access_authorities_pkey" tableName="module_access_authorities"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-63">
+        <addUniqueConstraint columnNames="code" constraintName="uk_5s4ptnuqtd24d4p9au2rv53qm" tableName="country"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-64">
+        <addUniqueConstraint columnNames="login" constraintName="uk_abtdf4jsbg0jx4ukyagjnkn2s" tableName="lamis_user"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-65">
+        <addUniqueConstraint columnNames="authorities_id" constraintName="uk_b9936vlbwk11arv8r16bofl7h" tableName="module_access_authorities"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-66">
+        <addUniqueConstraint columnNames="name" constraintName="uk_bg6nmvg6m1ch2onrn21136abg" tableName="lamis_authority"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-67">
+        <addUniqueConstraint columnNames="name" constraintName="uk_f73dsvaor0f4cycvldyt2idf1" tableName="module"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-68">
+        <addUniqueConstraint columnNames="name" constraintName="uk_llidyp77h6xkeokpbmoy710d4" tableName="country"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-69">
+        <addUniqueConstraint columnNames="base_package" constraintName="uk_rxqkmhg2y507iqe53my30p6sv" tableName="module"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-70">
+        <addForeignKeyConstraint baseColumnNames="module_id" baseTableName="service" constraintName="fk1esxr7voyh0ggmi1h9txmd74a" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="module"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-71">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="jhi_persistent_audit_evt_data" constraintName="fk2ehnyx2si4tjd2nt4q7y40v8m" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="event_id" referencedTableName="jhi_persistent_audit_event"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-72">
+        <addForeignKeyConstraint baseColumnNames="concept_id" baseTableName="concept_coding" constraintName="fk2fegs5f6hccd7vntvkoe66jeb" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="codeable_concept"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-73">
+        <addForeignKeyConstraint baseColumnNames="identifier_type_id" baseTableName="patient_service_enrollment" constraintName="fk38d2pakevnvub040hfhoidfep" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="identifier_type"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-74">
+        <addForeignKeyConstraint baseColumnNames="part_of_id" baseTableName="patient_encounter" constraintName="fk3yl1ejqrfxgyl26082id8qbei" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="patient_encounter"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-75">
+        <addForeignKeyConstraint baseColumnNames="state_id" baseTableName="address" constraintName="fk4cx5jughttw4h3qfxrcitbtxl" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="state"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-76">
+        <addForeignKeyConstraint baseColumnNames="marital_status_id" baseTableName="person" constraintName="fk5yh8c9tqc4xn6hqh0r0pp09gk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-77">
+        <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="lamis_user" constraintName="fk6ommbqyha4nf59erwhyqy29fw" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="person"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-78">
+        <addForeignKeyConstraint baseColumnNames="occupation_id" baseTableName="person" constraintName="fk8gl45vw84g1sxtqv8oh8a8yyk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-79">
+        <addForeignKeyConstraint baseColumnNames="patient_id" baseTableName="patient_service_enrollment" constraintName="fk8hswwl4ehsj5wrartv58w266e" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="patient"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-80">
+        <addForeignKeyConstraint baseColumnNames="service_id" baseTableName="patient_observation" constraintName="fk92drmje5yapeqcvhqsvm2r9nh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="service"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-81">
+        <addForeignKeyConstraint baseColumnNames="facility_id" baseTableName="patient" constraintName="fk9a9hgbosge595h19ovfk1wfti" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="facility"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-82">
+        <addForeignKeyConstraint baseColumnNames="visit_type_id" baseTableName="patient_visit" constraintName="fka10sxqddnm47qpqlf3d2d6uvt" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-83">
+        <addForeignKeyConstraint baseColumnNames="person_contact_id" baseTableName="address" constraintName="fkaq5jnaftt51simo1p62ibv18e" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="person_contact"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-84">
+        <addForeignKeyConstraint baseColumnNames="provider_id" baseTableName="provider_codeset" constraintName="fkayp6lu11cac8t5drph63qfho6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="provider"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-85">
+        <addForeignKeyConstraint baseColumnNames="module_access_id" baseTableName="module_access_authorities" constraintName="fkbgqwv3drbonncqlk12rsf8786" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="module_access"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-86">
+        <addForeignKeyConstraint baseColumnNames="facility_id" baseTableName="facility_service" constraintName="fkbkq9nd1li72getyd6892kb4fv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="facility"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-87">
+        <addForeignKeyConstraint baseColumnNames="authorities_id" baseTableName="module_access_authorities" constraintName="fkcn0w6tj9y2ra8vbapylc5jsec" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="lamis_authority"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-88">
+        <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="person_relative" constraintName="fkd64wahlx8neq4onjybh9xbny3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="person"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-89">
+        <addForeignKeyConstraint baseColumnNames="module_id" baseTableName="lamis_authority" constraintName="fkd7ykxyowraegr3vjdoiqwtmro" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="module"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-90">
+        <addForeignKeyConstraint baseColumnNames="services_id" baseTableName="patient_service_enrollment" constraintName="fkdlvuiwjp3iuren77cx6f5k6r" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="service"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-91">
+        <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="patient" constraintName="fkdxxw8hyl1nca8o4x5r5eap9kf" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="person"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-92">
+        <addForeignKeyConstraint baseColumnNames="country_id" baseTableName="address" constraintName="fke54x81nmccsk5569hsjg1a6ka" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="country"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-93">
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="patient_encounter" constraintName="fkecf150u39mtw7ojwf2n0ut2fu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="facility"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-94">
+        <addForeignKeyConstraint baseColumnNames="module_id" baseTableName="module_access" constraintName="fkep39owp8nbhraslpuimekdyxu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="module"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-95">
+        <addForeignKeyConstraint baseColumnNames="province_id" baseTableName="address" constraintName="fkf8x0jfwoo94op8u88og1ohdcn" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="province"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-96">
+        <addForeignKeyConstraint baseColumnNames="patient_encounter_id" baseTableName="patient_encounter_participants" constraintName="fkfo804c0ktj8ct666fes6dfd6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="patient_encounter"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-97">
+        <addForeignKeyConstraint baseColumnNames="gender_id" baseTableName="person" constraintName="fkg661tujkydc9kl22ej93sjyyg" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-98">
+        <addForeignKeyConstraint baseColumnNames="country_id" baseTableName="state" constraintName="fkghic7mqjt6qb9vq7up7awu0er" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="country"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-99">
+        <addForeignKeyConstraint baseColumnNames="patient_id" baseTableName="patient_visit" constraintName="fkhtganuckbeasnqc150d7d3qwt" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="patient"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-100">
+        <addForeignKeyConstraint baseColumnNames="services_id" baseTableName="patient_encounter" constraintName="fkik771f07jox1inu6fup6avr3h" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="service"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-101">
+        <addForeignKeyConstraint baseColumnNames="coding_id" baseTableName="concept_coding" constraintName="fkimincwxh9hr5n98rh9ifap8sa" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-102">
+        <addForeignKeyConstraint baseColumnNames="authority_id" baseTableName="lamis_user_authority" constraintName="fkinaguaj7i95x7pifw68dhpelh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="lamis_authority"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-103">
+        <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="person_contact" constraintName="fkjrxw70ofhttj1pdgr6xkgcj2l" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="person"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-104">
+        <addForeignKeyConstraint baseColumnNames="education_id" baseTableName="person" constraintName="fkk1banvkeg75kr1o2hyn9cubuy" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-105">
+        <addForeignKeyConstraint baseColumnNames="participants_id" baseTableName="patient_encounter_participants" constraintName="fkmpgmtcnmahkv6yss7uyql8wph" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="person"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-106">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="lamis_user_authority" constraintName="fko65pecqsme10jbr06aac6wopx" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="lamis_user"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-107">
+        <addForeignKeyConstraint baseColumnNames="service_id" baseTableName="service_form" constraintName="fkoampc9hs86wccfv0hr04n17if" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="service"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-108">
+        <addForeignKeyConstraint baseColumnNames="patient_id" baseTableName="patient_encounter" constraintName="fkojx48hu5k3lekddtqxbwr46bq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="patient"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-109">
+        <addForeignKeyConstraint baseColumnNames="patient_encounter_id" baseTableName="patient_observation" constraintName="fkpkcibuityj07n4fftli4iadtg" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="patient_encounter"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-110">
+        <addForeignKeyConstraint baseColumnNames="module_id" baseTableName="module_dependencies" constraintName="fkqp8s48djc02l67epibou3jhdc" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="module"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-111">
+        <addForeignKeyConstraint baseColumnNames="class_" baseTableName="patient_encounter" constraintName="fkrccbacslyfg8qgulvsrw4lljr" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-112">
+        <addForeignKeyConstraint baseColumnNames="state_id" baseTableName="province" constraintName="fkrfu0tmhtik7pcknlmw00tnq4t" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="state"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-113">
+        <addForeignKeyConstraint baseColumnNames="patient_id" baseTableName="patient_observation" constraintName="fks47b5jmqo31helwxquihh0ps7" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="patient"/>
+    </changeSet>
+    <changeSet author="alexanderalozie (generated)" id="1578134619583-114">
+        <addForeignKeyConstraint baseColumnNames="dependency_id" baseTableName="module_dependencies" constraintName="fkth48w4xpi3vi04rgbu5ym18wv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="module"/>
+    </changeSet>
+
+    <changeSet id="20180415081741-88866" author="alexanderalozie" dbms="postgresql">
+        <sql>ALTER TABLE patient_observation ALTER form_data TYPE JSONB USING form_data::JSONB</sql>
+    </changeSet>
+<!--    <changeSet id="extend MSG_TITLE to 120 characters" author="dba-presents.com">-->
+<!--        <modifyDataType tableName="MESSAGE" columnName="MSG_TITLE" newDataType="varchar(120)" />-->
+<!--    </changeSet>-->
+    <changeSet author="alexanderalozie" id="00000000000001-16">
+        <loadData encoding="UTF-8"
+                  file="installers/patient/schema/countries.csv"
+                  separator=";"
+                  tableName="country"/>
+    </changeSet>
+
+
+    <changeSet author="alexanderalozie" id="00000000000001-17">
+        <loadData encoding="UTF-8"
+                  file="installers/patient/schema/states.csv"
+                  separator=";"
+                  tableName="state"/>
+    </changeSet>
+    <changeSet author="alexanderalozie" id="00000000000001-18">
+        <loadData encoding="UTF-8"
+                  file="installers/patient/schema/province.csv"
+                  separator=";"
+                  tableName="province"/>
+    </changeSet>
+
+    <changeSet author="alexanderalozie" id="00000000000001-19">
+        <loadData encoding="UTF-8"
+                  file="installers/patient/schema/gender.csv"
+                  separator=";"
+                  tableName="codifier"/>
+    </changeSet>
+
+
+    <changeSet author="alexanderalozie" id="00000000000001-2111">
+        <loadData encoding="UTF-8"
+                  file="installers/patient/schema/education.csv"
+                  separator=";"
+                  tableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie" id="00000000000001-22">
+        <loadData encoding="UTF-8"
+                  file="installers/patient/schema/maritalStatus.csv"
+                  separator=";"
+                  tableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie" id="00000000000001-25">
+        <loadData encoding="UTF-8"
+                  file="installers/patient/schema/visittype.csv"
+                  separator=";"
+                  tableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie" id="00000000000001-20">
+        <loadData encoding="UTF-8"
+                  file="installers/patient/schema/occupations.csv"
+                  separator=";"
+                  tableName="codifier"/>
+    </changeSet>
+    <changeSet author="alexanderalozie" id="00000000000001-246">
+        <loadData encoding="UTF-8"
+                  file="installers/patient/schema/relationship.csv"
+                  separator=";"
+                  tableName="codifier"/>
+    </changeSet>
+
+    <changeSet id="2_3_0" author="alexanderalozie">
+        <sql dbms="mysql,postgresSQL.mariadb">
+            DROP TABLE IF EXISTS QRTZ_FIRED_TRIGGERS;
+            DROP TABLE IF EXISTS QRTZ_PAUSED_TRIGGER_GRPS;
+            DROP TABLE IF EXISTS QRTZ_SCHEDULER_STATE;
+            DROP TABLE IF EXISTS QRTZ_LOCKS;
+            DROP TABLE IF EXISTS QRTZ_SIMPLE_TRIGGERS;
+            DROP TABLE IF EXISTS QRTZ_SIMPROP_TRIGGERS;
+            DROP TABLE IF EXISTS QRTZ_CRON_TRIGGERS;
+            DROP TABLE IF EXISTS QRTZ_BLOB_TRIGGERS;
+            DROP TABLE IF EXISTS QRTZ_TRIGGERS;
+            DROP TABLE IF EXISTS QRTZ_JOB_DETAILS;
+            DROP TABLE IF EXISTS QRTZ_CALENDARS;
+
+            CREATE TABLE QRTZ_JOB_DETAILS(
+            SCHED_NAME VARCHAR(120) NOT NULL,
+            JOB_NAME VARCHAR(190) NOT NULL,
+            JOB_GROUP VARCHAR(190) NOT NULL,
+            DESCRIPTION VARCHAR(250) NULL,
+            JOB_CLASS_NAME VARCHAR(250) NOT NULL,
+            IS_DURABLE VARCHAR(1) NOT NULL,
+            IS_NONCONCURRENT VARCHAR(1) NOT NULL,
+            IS_UPDATE_DATA VARCHAR(1) NOT NULL,
+            REQUESTS_RECOVERY VARCHAR(1) NOT NULL,
+            JOB_DATA BLOB NULL,
+            PRIMARY KEY (SCHED_NAME,JOB_NAME,JOB_GROUP))
+            ENGINE=InnoDB;
+
+            CREATE TABLE QRTZ_TRIGGERS (
+            SCHED_NAME VARCHAR(120) NOT NULL,
+            TRIGGER_NAME VARCHAR(190) NOT NULL,
+            TRIGGER_GROUP VARCHAR(190) NOT NULL,
+            JOB_NAME VARCHAR(190) NOT NULL,
+            JOB_GROUP VARCHAR(190) NOT NULL,
+            DESCRIPTION VARCHAR(250) NULL,
+            NEXT_FIRE_TIME BIGINT(13) NULL,
+            PREV_FIRE_TIME BIGINT(13) NULL,
+            PRIORITY INTEGER NULL,
+            TRIGGER_STATE VARCHAR(16) NOT NULL,
+            TRIGGER_TYPE VARCHAR(8) NOT NULL,
+            START_TIME BIGINT(13) NOT NULL,
+            END_TIME BIGINT(13) NULL,
+            CALENDAR_NAME VARCHAR(190) NULL,
+            MISFIRE_INSTR SMALLINT(2) NULL,
+            JOB_DATA BLOB NULL,
+            PRIMARY KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),
+            FOREIGN KEY (SCHED_NAME,JOB_NAME,JOB_GROUP)
+            REFERENCES QRTZ_JOB_DETAILS(SCHED_NAME,JOB_NAME,JOB_GROUP))
+            ENGINE=InnoDB;
+
+            CREATE TABLE QRTZ_SIMPLE_TRIGGERS (
+            SCHED_NAME VARCHAR(120) NOT NULL,
+            TRIGGER_NAME VARCHAR(190) NOT NULL,
+            TRIGGER_GROUP VARCHAR(190) NOT NULL,
+            REPEAT_COUNT BIGINT(7) NOT NULL,
+            REPEAT_INTERVAL BIGINT(12) NOT NULL,
+            TIMES_TRIGGERED BIGINT(10) NOT NULL,
+            PRIMARY KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),
+            FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
+            REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP))
+            ENGINE=InnoDB;
+
+            CREATE TABLE QRTZ_CRON_TRIGGERS (
+            SCHED_NAME VARCHAR(120) NOT NULL,
+            TRIGGER_NAME VARCHAR(190) NOT NULL,
+            TRIGGER_GROUP VARCHAR(190) NOT NULL,
+            CRON_EXPRESSION VARCHAR(120) NOT NULL,
+            TIME_ZONE_ID VARCHAR(80),
+            PRIMARY KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),
+            FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
+            REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP))
+            ENGINE=InnoDB;
+
+            CREATE TABLE QRTZ_SIMPROP_TRIGGERS
+            (
+            SCHED_NAME VARCHAR(120) NOT NULL,
+            TRIGGER_NAME VARCHAR(190) NOT NULL,
+            TRIGGER_GROUP VARCHAR(190) NOT NULL,
+            STR_PROP_1 VARCHAR(512) NULL,
+            STR_PROP_2 VARCHAR(512) NULL,
+            STR_PROP_3 VARCHAR(512) NULL,
+            INT_PROP_1 INT NULL,
+            INT_PROP_2 INT NULL,
+            LONG_PROP_1 BIGINT NULL,
+            LONG_PROP_2 BIGINT NULL,
+            DEC_PROP_1 NUMERIC(13,4) NULL,
+            DEC_PROP_2 NUMERIC(13,4) NULL,
+            BOOL_PROP_1 VARCHAR(1) NULL,
+            BOOL_PROP_2 VARCHAR(1) NULL,
+            PRIMARY KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),
+            FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
+            REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP))
+            ENGINE=InnoDB;
+
+            CREATE TABLE QRTZ_BLOB_TRIGGERS (
+            SCHED_NAME VARCHAR(120) NOT NULL,
+            TRIGGER_NAME VARCHAR(190) NOT NULL,
+            TRIGGER_GROUP VARCHAR(190) NOT NULL,
+            BLOB_DATA BLOB NULL,
+            PRIMARY KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),
+            INDEX (SCHED_NAME,TRIGGER_NAME, TRIGGER_GROUP),
+            FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
+            REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP))
+            ENGINE=InnoDB;
+
+            CREATE TABLE QRTZ_CALENDARS (
+            SCHED_NAME VARCHAR(120) NOT NULL,
+            CALENDAR_NAME VARCHAR(190) NOT NULL,
+            CALENDAR BLOB NOT NULL,
+            PRIMARY KEY (SCHED_NAME,CALENDAR_NAME))
+            ENGINE=InnoDB;
+
+            CREATE TABLE QRTZ_PAUSED_TRIGGER_GRPS (
+            SCHED_NAME VARCHAR(120) NOT NULL,
+            TRIGGER_GROUP VARCHAR(190) NOT NULL,
+            PRIMARY KEY (SCHED_NAME,TRIGGER_GROUP))
+            ENGINE=InnoDB;
+
+            CREATE TABLE QRTZ_FIRED_TRIGGERS (
+            SCHED_NAME VARCHAR(120) NOT NULL,
+            ENTRY_ID VARCHAR(95) NOT NULL,
+            TRIGGER_NAME VARCHAR(190) NOT NULL,
+            TRIGGER_GROUP VARCHAR(190) NOT NULL,
+            INSTANCE_NAME VARCHAR(190) NOT NULL,
+            FIRED_TIME BIGINT(13) NOT NULL,
+            SCHED_TIME BIGINT(13) NOT NULL,
+            PRIORITY INTEGER NOT NULL,
+            STATE VARCHAR(16) NOT NULL,
+            JOB_NAME VARCHAR(190) NULL,
+            JOB_GROUP VARCHAR(190) NULL,
+            IS_NONCONCURRENT VARCHAR(1) NULL,
+            REQUESTS_RECOVERY VARCHAR(1) NULL,
+            PRIMARY KEY (SCHED_NAME,ENTRY_ID))
+            ENGINE=InnoDB;
+
+            CREATE TABLE QRTZ_SCHEDULER_STATE (
+            SCHED_NAME VARCHAR(120) NOT NULL,
+            INSTANCE_NAME VARCHAR(190) NOT NULL,
+            LAST_CHECKIN_TIME BIGINT(13) NOT NULL,
+            CHECKIN_INTERVAL BIGINT(13) NOT NULL,
+            PRIMARY KEY (SCHED_NAME,INSTANCE_NAME))
+            ENGINE=InnoDB;
+
+            CREATE TABLE QRTZ_LOCKS (
+            SCHED_NAME VARCHAR(120) NOT NULL,
+            LOCK_NAME VARCHAR(40) NOT NULL,
+            PRIMARY KEY (SCHED_NAME,LOCK_NAME))
+            ENGINE=InnoDB;
+
+            CREATE INDEX IDX_QRTZ_J_REQ_RECOVERY ON QRTZ_JOB_DETAILS(SCHED_NAME,REQUESTS_RECOVERY);
+            CREATE INDEX IDX_QRTZ_J_GRP ON QRTZ_JOB_DETAILS(SCHED_NAME,JOB_GROUP);
+
+            CREATE INDEX IDX_QRTZ_T_J ON QRTZ_TRIGGERS(SCHED_NAME,JOB_NAME,JOB_GROUP);
+            CREATE INDEX IDX_QRTZ_T_JG ON QRTZ_TRIGGERS(SCHED_NAME,JOB_GROUP);
+            CREATE INDEX IDX_QRTZ_T_C ON QRTZ_TRIGGERS(SCHED_NAME,CALENDAR_NAME);
+            CREATE INDEX IDX_QRTZ_T_G ON QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_GROUP);
+            CREATE INDEX IDX_QRTZ_T_STATE ON QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_STATE);
+            CREATE INDEX IDX_QRTZ_T_N_STATE ON QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,TRIGGER_STATE);
+            CREATE INDEX IDX_QRTZ_T_N_G_STATE ON QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_GROUP,TRIGGER_STATE);
+            CREATE INDEX IDX_QRTZ_T_NEXT_FIRE_TIME ON QRTZ_TRIGGERS(SCHED_NAME,NEXT_FIRE_TIME);
+            CREATE INDEX IDX_QRTZ_T_NFT_ST ON QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_STATE,NEXT_FIRE_TIME);
+            CREATE INDEX IDX_QRTZ_T_NFT_MISFIRE ON QRTZ_TRIGGERS(SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME);
+            CREATE INDEX IDX_QRTZ_T_NFT_ST_MISFIRE ON
+            QRTZ_TRIGGERS(SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME,TRIGGER_STATE);
+            CREATE INDEX IDX_QRTZ_T_NFT_ST_MISFIRE_GRP ON
+            QRTZ_TRIGGERS(SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME,TRIGGER_GROUP,TRIGGER_STATE);
+
+            CREATE INDEX IDX_QRTZ_FT_TRIG_INST_NAME ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,INSTANCE_NAME);
+            CREATE INDEX IDX_QRTZ_FT_INST_JOB_REQ_RCVRY ON
+            QRTZ_FIRED_TRIGGERS(SCHED_NAME,INSTANCE_NAME,REQUESTS_RECOVERY);
+            CREATE INDEX IDX_QRTZ_FT_J_G ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_NAME,JOB_GROUP);
+            CREATE INDEX IDX_QRTZ_FT_JG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_GROUP);
+            CREATE INDEX IDX_QRTZ_FT_T_G ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP);
+            CREATE INDEX IDX_QRTZ_FT_TG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_GROUP);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
