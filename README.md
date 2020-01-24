@@ -35,7 +35,7 @@ Execute the following
  This will generate the LAMISPlus application in `target/lamisplus.war` which you will have to deploy into an application server like for example [tomcat](https://tomcat.apache.org/) or [jetty](http://www.eclipse.org/jetty/). 
 
 ##Database Initialization
-When you launh your application for the first time. The applicattion will initialize your database using liqguid base.  Lamisplus uses postgreSQL database as most of the data are stores as JSONB and is well suppoeted by Postgres.
+When you launh your application for the first time. The applicattion will initialize your database using Liquibase. Lamisplus uses postgreSQL database as most of the data are stores as JSONB and is well suppoeted by PostgreSQL.
  
 ### Deploy 
  For development purposes you can simply deploy the ` lamisplus.war`   using any server of your choice (tomcat among others) 
